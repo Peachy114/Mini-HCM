@@ -305,9 +305,9 @@ export default function DailyReport() {
                       </td>
                       <td className="px-5 py-3 font-mono text-xs text-stone-600">{formatTime(row.punchIn)}</td>
                       <td className="px-5 py-3 font-mono text-xs text-stone-500">{row.punchOut ? formatTime(row.punchOut) : '—'}</td>
-                      <td className="px-5 py-3 text-stone-700">{row.regularHours}<span className="text-stone-400 text-xs ml-0.5">h</span></td>
-                      <td className="px-5 py-3 text-stone-700">{row.overtimeHours}<span className="text-stone-400 text-xs ml-0.5">h</span></td>
-                      <td className="px-5 py-3 text-stone-700">{row.nightDiffHours}<span className="text-stone-400 text-xs ml-0.5">h</span></td>
+                      <td className="px-5 py-3 text-stone-700">{minsToHrsMins(Math.round(row.regularHours * 60))}<span className="text-stone-400 text-xs ml-0.5"></span></td>
+                      <td className="px-5 py-3 text-stone-700">{minsToHrsMins(Math.round(row.overtimeHours * 60))}<span className="text-stone-400 text-xs ml-0.5"></span></td>
+                      <td className="px-5 py-3 text-stone-700">{minsToHrsMins(Math.round(row.nightDiffHours * 60))}<span className="text-stone-400 text-xs ml-0.5"></span></td>
                       <td className="px-5 py-3">
                         {row.lateMinutes > 0
                           ? <span className="text-xs text-orange-500 bg-orange-50 px-2 py-0.5 rounded-full font-medium">{minsToHrsMins(Math.floor(row.lateMinutes))}</span>
@@ -318,7 +318,7 @@ export default function DailyReport() {
                           ? <span className="text-xs text-red-500 bg-red-50 px-2 py-0.5 rounded-full font-medium">{minsToHrsMins(Math.floor(row.undertimeMinutes))}</span>
                           : <span className="text-stone-300">—</span>}
                       </td>
-                      <td className="px-5 py-3 font-bold text-stone-800">{row.totalWorkHours}<span className="text-stone-400 text-xs ml-0.5 font-normal">h</span></td>
+                      <td className="px-5 py-3 font-bold text-stone-800">{Math.floor(row.totalWorkHours)}<span className="text-stone-400 text-xs ml-0.5 font-normal">h</span></td>
                     </tr>
                   ))}
                 </tbody>

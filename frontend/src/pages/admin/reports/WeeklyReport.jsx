@@ -128,7 +128,6 @@
 //   );
 // }===================================COMMENT FOR EAY DEBUGGING-=========================
 
-
 import { useState, useEffect } from "react";
 import api from "@/utils/api";
 import { minsToHrsMins, getMondayString } from "@/utils/helper";
@@ -193,7 +192,7 @@ export default function WeeklyReport() {
   }
 
   return (
-    <div className="p-8">
+    <div className="p-8"> 
 
       {/* Header */}
       <div className="mb-8">
@@ -281,9 +280,9 @@ export default function WeeklyReport() {
 
                   {/* Weekly totals */}
                   <div className="grid grid-cols-3 sm:grid-cols-6 gap-2">
-                    <StatBox label="Regular"    value={`${row.totalRegularHours}h`} />
-                    <StatBox label="Overtime"   value={`${row.totalOvertimeHours}h`} />
-                    <StatBox label="Night Diff" value={`${row.totalNightDiffHours}h`} />
+                    <StatBox label="Regular"    value={minsToHrsMins(Math.round(row.totalRegularHours * 60))} />
+                    <StatBox label="Overtime"   value={minsToHrsMins(Math.round(row.totalOvertimeHours * 60))} />
+                    <StatBox label="Night Diff" value={minsToHrsMins(Math.round(row.totalNightDiffHours * 60))} />
                     <StatBox
                       label="Late"
                       value={row.totalLateMinutes > 0 ? minsToHrsMins(Math.floor(row.totalLateMinutes)) : '—'}
@@ -294,7 +293,7 @@ export default function WeeklyReport() {
                       value={row.totalUndertimeMinutes > 0 ? minsToHrsMins(Math.floor(row.totalUndertimeMinutes)) : '—'}
                       color={row.totalUndertimeMinutes > 0 ? 'text-red-500' : 'text-stone-400'}
                     />
-                    <StatBox label="Total" value={`${row.totalWorkHours}h`} color="text-stone-900 font-bold" />
+                    <StatBox label="Total" value={`${Math.floor(row.totalWorkHours)}h`} color="text-stone-900 font-bold" />
                   </div>
                 </div>
 
@@ -313,13 +312,13 @@ export default function WeeklyReport() {
                             <p className="text-xs text-stone-400 italic">No record</p>
                           ) : (
                             <div className="space-y-1.5">
-                              <DayRow label="Regular"    value={`${data.regularHours || 0}h`} />
-                              <DayRow label="OT"         value={`${data.overtimeHours || 0}h`} />
-                              <DayRow label="Night Diff" value={`${data.nightDiffHours || 0}h`} />
+                              <DayRow label="Regular"    value={minsToHrsMins(Math.round((data.regularHours || 0) * 60))} />
+                              <DayRow label="OT"         value={minsToHrsMins(Math.round((data.overtimeHours || 0) * 60))} />
+                              <DayRow label="Night Diff" value={minsToHrsMins(Math.round((data.nightDiffHours || 0) * 60))} />
                               <DayRow label="Late"       value={(data.lateMinutes||0) > 0 ? minsToHrsMins(Math.floor(data.lateMinutes)) : '—'} color={(data.lateMinutes||0) > 0 ? 'text-orange-500' : 'text-stone-400'} />
                               <DayRow label="Undertime"  value={(data.undertimeMinutes||0) > 0 ? minsToHrsMins(Math.floor(data.undertimeMinutes)) : '—'} color={(data.undertimeMinutes||0) > 0 ? 'text-red-500' : 'text-stone-400'} />
                               <div className="border-t border-stone-100 pt-1.5 mt-1.5">
-                                <DayRow label="Total" value={`${data.totalWorkHours || 0}h`} bold />
+                                <DayRow label="Total" value={`${Math.floor(data.totalWorkHours || 0)}h`} bold />
                               </div>
                             </div>
                           )}
