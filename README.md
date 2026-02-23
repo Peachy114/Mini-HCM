@@ -62,6 +62,7 @@ Create a `.env` file in `/backend`:
 
 ```env
 PORT=5000
+FRONTEND_URL=your_frontend_url
 FIREBASE_PROJECT_ID=your_project_id
 FIREBASE_CLIENT_EMAIL=your_client_email
 FIREBASE_PRIVATE_KEY="-----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----\n"
@@ -87,9 +88,12 @@ Create a `.env` file in `/frontend`:
 
 ```env
 VITE_FIREBASE_API_KEY=your_api_key
-VITE_FIREBASE_AUTH_DOMAIN=your_auth_domain
+VITE_FIREBASE_AUTH_DOMAIN=your_project_id.firebaseapp.com
 VITE_FIREBASE_PROJECT_ID=your_project_id
+VITE_FIREBASE_STORAGE_BUCKET=your_project_id.appspot.com
+VITE_FIREBASE_MESSAGING_SENDER_ID=your_messaging_sender_id
 VITE_FIREBASE_APP_ID=your_app_id
+VITE_FIREBASE_MEASUREMENT_ID=your_measurement_id
 VITE_API_URL=http://localhost:5000/api
 ```
 
