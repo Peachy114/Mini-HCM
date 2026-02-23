@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState, useRef } from "react";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "@/config/firebase";
 import api from "@/utils/api";
@@ -9,13 +9,18 @@ export function AuthProvider({ children }) {
     const [ user, setUser ] = useState(null);
     const [ profile, setProfile ] = useState(null);
     const [ loading, setLoading ] = useState(true);
+    const skipFetch = useRef(false);
 
     useEffect(() => {
-        //firebase auth listener
         const unsub = onAuthStateChanged(auth, async (firebaseUser) => {
             if (firebaseUser) {
                 setUser(firebaseUser);
-                try{
+                if (skipFetch.current) {
+                    skipFetch.current = false; 
+                    setLoading(false);
+                    return;
+                }
+                try {
                     const res = await api.get('/auth/me');
                     setProfile(res.data);
                 } catch (err) {
@@ -27,7 +32,6 @@ export function AuthProvider({ children }) {
             }
             setLoading(false);
         });
-
         return () => unsub();
     }, []);
 
@@ -45,7 +49,7 @@ export function AuthProvider({ children }) {
     }
 
     return (
-        <AuthContext.Provider value={{ user, profile, loading, logout, refreshProfile }}>
+        <AuthContext.Provider value={{ user, profile, loading, logout, refreshProfile, skipFetch }}>
             { children}
         </AuthContext.Provider>
     )

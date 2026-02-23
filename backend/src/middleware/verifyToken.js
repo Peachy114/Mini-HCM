@@ -1,4 +1,4 @@
-import { auth } from '../config/firebase-admin.js';
+import { auth, db } from '../config/firebase-admin.js';
 
 export const verifyToken = async (req, res, next) => {
     try {
@@ -12,7 +12,13 @@ export const verifyToken = async (req, res, next) => {
         // const token = header.split('Bearer ')[1];
         const decoded = await auth.verifyIdToken(token);
 
-        req.user = decoded;
+        //to get role
+        const snap = await db.collection('users').doc(decoded.uid).get();
+        if (snap.exists)  {
+            req.user = { ...decoded, ...snap.data() };
+        } else {
+            req.user = decoded;
+        }
 
         next();
     } catch (err) {
