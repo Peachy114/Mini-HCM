@@ -16,7 +16,6 @@ const port = process.env.PORT;
 app.use(cors({ origin: process.env.FRONTEND_URL}));
 app.use(express.json());
 
-
 //routes
 app.use("/api/auth", authRoutes);
 app.use("/api/admin/employees", admin_routes); //admin

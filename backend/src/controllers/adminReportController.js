@@ -2,56 +2,6 @@ import {db} from "../config/firebase-admin.js";
 import { computeMetrics } from "../utils/computeMatrics.js";
 import { round2, dateToString, getMondayString, todayString} from "../utils/helper.js"
 
-//api/admin/reports/daily?date=something
-// export const getDailyReport = async (req, res) => {
-//   try {
-//     const date = req.query.date || todayString();
-//     console.log('=== DAILY REPORT ===', date);
-
-//     // Get all summaries for that date
-//     const snap = await db.collection('dailySummary')
-//       .where('date', '==', date)
-//       .get();
-
-//     if (snap.empty) {
-//       return res.json([]);
-//     }
-
-//     // Get all users to attach names
-//     const usersSnap = await db.collection('users').get();
-//     const usersMap  = {};
-//     usersSnap.docs.forEach(d => { usersMap[d.id] = d.data(); });
-
-//     const report = snap.docs.map(doc => {
-//       const s    = doc.data();
-//       const user = usersMap[s.userId] || {};
-//       return {
-//         id:           doc.id,
-//         userId:       s.userId,
-//         name:         user.name  || 'Unknown',
-//         email:        user.email || '',
-//         role:         user.role  || '',
-//         date:         s.date,
-//         scheduledStart:    s.scheduledStart,
-//         scheduledEnd:      s.scheduledEnd,
-//         regularHours:      s.regularHours      || 0,
-//         overtimeHours:     s.overtimeHours     || 0,
-//         nightDiffHours:    s.nightDiffHours    || 0,
-//         lateMinutes:       s.lateMinutes       || 0,
-//         undertimeMinutes:  s.undertimeMinutes  || 0,
-//         totalWorkHours:    s.totalWorkHours    || 0,
-//         punchIn:           s.punchIn,
-//         punchOut:          s.punchOut,
-//       };
-//     });
-
-//     return res.json(report);
-
-//   } catch (err) {
-//     console.log('=== DAILY REPORT ERROR ===', err.message);
-//     return res.status(500).json({ error: err.message });
-//   }
-// };
 export const getDailyReport = async (req, res) => {
   try {
     const date = req.query.date || todayString();

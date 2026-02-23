@@ -96,3 +96,7 @@ build/Release
 
 # dataconnect generated files
 .dataconnect
+
+
+frontend/.gitignore
+backend/.gitignore

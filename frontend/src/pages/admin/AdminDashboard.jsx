@@ -102,7 +102,7 @@ export default function AdminDashboard() {
             {new Date().toLocaleDateString("en-PH", { weekday: "long", month: "long", day: "numeric", year: "numeric" })}
           </p>
           <h1 className="text-3xl font-bold text-stone-900 tracking-tight mb-1">
-            Welcome back, {profile?.name} 👋
+            Welcome back, {profile?.name}!
           </h1>
           <p className="text-sm text-stone-400">
             You're logged in as{" "}

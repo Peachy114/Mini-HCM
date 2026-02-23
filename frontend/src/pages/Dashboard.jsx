@@ -164,7 +164,7 @@ import { useActionState } from "@/hooks/useActionState";
 function getGreeting() {
   const h = new Date().getHours();
   if (h < 12) return "Good morning";
-  if (h < 18) return "Good afternoon";
+  if (h < 18) return "Good afternoon buckle up";
   return "Good evening";
 }
 
@@ -259,7 +259,7 @@ export default function Dashboard() {
             {new Date().toLocaleDateString("en-PH", { weekday: "long", month: "long", day: "numeric", year: "numeric" })}
           </p>
           <h1 className="text-3xl font-bold text-stone-900 tracking-tight mb-1">
-            {getGreeting()}, {profile?.name} 👋
+            {getGreeting()}, {profile?.name}
           </h1>
           <p className="text-sm text-stone-400">
             Your shift today is{" "}
