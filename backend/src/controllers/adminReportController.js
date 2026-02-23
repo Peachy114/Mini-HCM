@@ -163,6 +163,20 @@ export const editAttendance = async (req, res) => {
     const newIn  = new Date(punchIn);
     const newOut = new Date(punchOut);
 
+    if (isNaN(newIn.getTime()) || isNaN(newOut.getTime())) {
+      return res.status(400).json({ error: 'Invalid date format.' });
+    }
+
+    if (newOut <= newIn) {
+      return res.status(400).json({ error: 'Clock out must be after clock in.' });
+    }
+
+    const diffMins = Math.round((newOut - newIn) / 60000);
+    if (diffMins > 1440) {
+      return res.status(400).json({ error: `Shift duration is ${Math.round(diffMins / 60)} hours. Cannot exceed 24 hours.` });
+    }
+
+
     // Update attendance record
     await docRef.update({
       punchIn:  newIn,

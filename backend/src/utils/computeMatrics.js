@@ -48,9 +48,9 @@ const undertimeMinutes = Math.max(0, Math.round((schedEnd - outTime)  / 60000));
             console.error('Night diff loop exceeded 24 hours');
             break;
         }
-        
-        const hour = clockCursor.getHours();
-        if(hour >= 22 || hour < 6 ) ndMins++;
+
+        const hour = parseInt(formatInTimeZone(clockCursor, TZ, 'H'), 10); // Manila hour
+        if (hour >= 22 || hour < 6) ndMins++;
         clockCursor = new Date(clockCursor.getTime() + 60000);
     }
 
