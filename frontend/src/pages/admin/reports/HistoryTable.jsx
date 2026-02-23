@@ -126,12 +126,12 @@ export default function HistoryTable() {
               <td className="px-5 py-3 font-semibold text-stone-700 whitespace-nowrap">{row.date}</td>
               <td className="px-5 py-3"><TimeCell ts={row.punchIn} /></td>
               <td className="px-5 py-3"><TimeCell ts={row.punchOut} /></td>
-              <td className="px-5 py-3 text-stone-600">{row.regularHours}h</td>
+              <td className="px-5 py-3 text-stone-600">{minsToHrsMins(Math.round(row.regularHours * 60))}</td>
               <td className="px-5 py-3">
-                <Pill value={row.overtimeHours > 0 ? `${row.overtimeHours}h` : null} color="blue" />
+                <Pill value={row.overtimeHours > 0 ? minsToHrsMins(Math.round(row.overtimeHours * 60)) : null} color="blue" />
               </td>
               <td className="px-5 py-3">
-                <Pill value={row.nightDiffHours > 0 ? `${row.nightDiffHours}h` : null} color="violet" />
+                <Pill value={row.nightDiffHours > 0 ? minsToHrsMins(Math.round(row.nightDiffHours * 60)) : null} color="violet" />
               </td>
               <td className="px-5 py-3">
                 <Pill value={row.lateMinutes > 0 ? minsToHrsMins(Math.floor(row.lateMinutes)) : null} color="orange" />
@@ -139,7 +139,7 @@ export default function HistoryTable() {
               <td className="px-5 py-3">
                 <Pill value={row.undertimeMinutes > 0 ? minsToHrsMins(Math.floor(row.undertimeMinutes)) : null} color="red" />
               </td>
-              <td className="px-5 py-3 font-semibold text-stone-700">{row.totalWorkHours}h</td>
+              <td className="px-5 py-3 font-semibold text-stone-700">{Math.floor(row.totalWorkHours)}h</td>
             </tr>
           ))}
         </tbody>

@@ -152,7 +152,6 @@
 //     )
 // }
 
-
 // THIS IS FOR EMPLOYEEEEEEEEEEE DASHBOARDDD================================
 import { useAuth } from "@/context/AuthContext";
 import { useEffect, useState } from "react";
@@ -359,12 +358,12 @@ export default function Dashboard() {
             Today's Summary
           </p>
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-            <StatCard label="Regular"    value={`${summary?.regularHours    ?? 0} hrs`} />
-            <StatCard label="Overtime"   value={`${summary?.overtimeHours   ?? 0} hrs`} />
-            <StatCard label="Night Diff" value={`${summary?.nightDiffHours  ?? 0} hrs`} />
-            <StatCard label="Late"       value={minsToHrsMins(summary?.lateMinutes      ?? 0)} />
-            <StatCard label="Undertime"  value={minsToHrsMins(summary?.undertimeMinutes ?? 0)} />
-            <StatCard label="Total"      value={`${summary?.totalWorkHours  ?? 0} hrs`} />
+            <StatCard label="Regular"    value={minsToHrsMins(Math.round((summary?.regularHours   ?? 0) * 60))} />
+            <StatCard label="Overtime"   value={minsToHrsMins(Math.round((summary?.overtimeHours  ?? 0) * 60))} />
+            <StatCard label="Night Diff" value={minsToHrsMins(Math.round((summary?.nightDiffHours ?? 0) * 60))} />
+            <StatCard label="Late"       value={minsToHrsMins(Math.floor(summary?.lateMinutes      ?? 0))} />
+            <StatCard label="Undertime"  value={minsToHrsMins(Math.floor(summary?.undertimeMinutes ?? 0))} />
+            <StatCard label="Total"      value={`${Math.floor(summary?.totalWorkHours ?? 0)}h`} />
           </div>
         </div>
 
